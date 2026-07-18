@@ -26,7 +26,7 @@ export default function Footer() {
         <div className="footer__brand">
           <a href="#home" className="footer__logo">
             <span className="footer__logo-badge">
-              <img src="/logo.png" alt="East West Logistics LLC" />
+              <img src={`${import.meta.env.BASE_URL}logo.png`} alt="East West Logistics LLC" />
             </span>
           </a>
           <p>

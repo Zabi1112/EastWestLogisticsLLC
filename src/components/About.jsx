@@ -25,7 +25,7 @@ export default function About() {
       <div className="container about__inner">
         <div className="about__art">
           <div className="about__art-frame">
-            <img src="/logo.png" alt="East West Logistics LLC truck icon" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="East West Logistics LLC truck icon" />
           </div>
           <div className="about__art-stat">
             <strong>7+ Years</strong>

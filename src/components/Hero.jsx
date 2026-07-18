@@ -49,7 +49,7 @@ export default function Hero() {
 
         <div className="hero__art">
           <div className="hero__art-card">
-            <img src="/logo.png" alt="East West Logistics LLC" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="East West Logistics LLC" />
           </div>
           <div className="hero__badge hero__badge--top">
             <span>MC #000000</span>

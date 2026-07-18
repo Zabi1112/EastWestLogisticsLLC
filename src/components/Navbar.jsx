@@ -27,7 +27,7 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
         <a href="#home" className="navbar__brand" onClick={handleNavClick}>
-          <img src="/logo.png" alt="East West Logistics LLC" />
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="East West Logistics LLC" />
           <span className="navbar__brand-text">
             <strong>East West</strong>
             <em>Logistics LLC</em>
