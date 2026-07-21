@@ -3,6 +3,7 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Services from './components/Services.jsx'
 import Testimonials from './components/Testimonials.jsx'
+import CarrierDirectory from './components/CarrierDirectory.jsx'
 import CarrierSignup from './components/CarrierSignup.jsx'
 import FAQ from './components/FAQ.jsx'
 import Contact from './components/Contact.jsx'
@@ -16,6 +17,7 @@ function App() {
       <About />
       <Services />
       <Testimonials />
+      <CarrierDirectory />
       <CarrierSignup />
       <FAQ />
       <Contact />

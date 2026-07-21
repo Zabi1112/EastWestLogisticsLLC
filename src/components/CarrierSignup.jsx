@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { sendEmail } from '../lib/emailjs'
+import { submitCarrierSignup } from '../lib/sheets'
 import './CarrierSignup.css'
 
 const BENEFITS = [
@@ -56,9 +57,24 @@ export default function CarrierSignup() {
       setSubmitted(true)
     } catch {
       setError('Something went wrong sending your request. Please try again or call us directly.')
-    } finally {
       setSending(false)
+      return
     }
+
+    // Best-effort: log the application in the Signups sheet for approval
+    // tracking. Failure here shouldn't affect the user-facing success state.
+    submitCarrierSignup({
+      name: form.name,
+      company: form.company,
+      mcNumber: form.mcNumber,
+      phone: form.phone,
+      email: form.email,
+      truckType: form.truckType,
+      homeBase: form.homeBase,
+      notes: form.message,
+    }).catch((err) => console.error('Sheets signup log failed:', err))
+
+    setSending(false)
   }
 
   return (

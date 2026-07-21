@@ -5,6 +5,7 @@ const LINKS = [
   { href: '#about', label: 'About' },
   { href: '#services', label: 'Services' },
   { href: '#testimonials', label: 'Testimonials' },
+  { href: '#our-carriers', label: 'Our Carriers' },
   { href: '#carriers', label: 'For Carriers' },
   { href: '#faq', label: 'FAQ' },
   { href: '#contact', label: 'Contact' },
