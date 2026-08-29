@@ -74,8 +74,8 @@ export default function Footer() {
         <div className="container footer__bottom-inner">
           <span>&copy; {YEAR} East West Logistics LLC. All rights reserved.</span>
           <div className="footer__legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href={`${import.meta.env.BASE_URL}privacy.html`}>Privacy Policy</a>
+            <a href={`${import.meta.env.BASE_URL}terms.html`}>Terms of Service</a>
           </div>
         </div>
       </div>

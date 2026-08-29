@@ -7,6 +7,7 @@ const LINKS = [
   { href: '#testimonials', label: 'Testimonials' },
   { href: '#our-carriers', label: 'Our Carriers' },
   { href: '#carriers', label: 'For Carriers' },
+  { href: '#sms-signup', label: 'SMS Sign-Up' },
   { href: '#faq', label: 'FAQ' },
   { href: '#contact', label: 'Contact' },
 ]

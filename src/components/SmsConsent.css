@@ -1,0 +1,165 @@
+.sms {
+  background: var(--slate-50);
+}
+
+.sms__inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.sms__head h2 {
+  font-size: clamp(26px, 3.4vw, 36px);
+  margin-top: 12px;
+}
+
+.sms__head p {
+  margin-top: 16px;
+  color: var(--slate-700);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.sms__card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-lg);
+}
+
+.sms__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sms__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sms__field span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy-800);
+}
+
+.sms__field em {
+  color: var(--orange-500);
+  font-style: normal;
+  margin-left: 3px;
+}
+
+.sms__field input {
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: var(--slate-900);
+  background: var(--white);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sms__field input:focus {
+  outline: none;
+  border-color: var(--orange-500);
+  box-shadow: 0 0 0 3px rgba(217, 98, 47, 0.15);
+}
+
+.sms__consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px;
+  border: 1.5px solid var(--slate-300);
+  border-radius: var(--radius-sm);
+  background: var(--slate-50);
+}
+
+.sms__consent input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--orange-500);
+  flex-shrink: 0;
+}
+
+.sms__consent span {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--slate-700);
+}
+
+.sms__ack {
+  font-size: 13px;
+  color: var(--slate-700);
+  line-height: 1.6;
+}
+
+.sms__ack a,
+.sms__legal-links a {
+  color: var(--orange-600);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.sms__error {
+  color: #e0574c;
+  font-size: 13.5px;
+}
+
+.sms__legal-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--slate-500);
+}
+
+.sms__form .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sms__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 12px;
+  gap: 6px;
+}
+
+.sms__success h3 {
+  margin-top: 12px;
+  font-size: 22px;
+}
+
+.sms__success p {
+  color: var(--slate-500);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  max-width: 360px;
+}
+
+@media (max-width: 980px) {
+  .sms__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .sms__head p {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .sms__card {
+    padding: 24px;
+  }
+}

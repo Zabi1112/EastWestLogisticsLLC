@@ -5,6 +5,7 @@ import Services from './components/Services.jsx'
 import Testimonials from './components/Testimonials.jsx'
 import CarrierDirectory from './components/CarrierDirectory.jsx'
 import CarrierSignup from './components/CarrierSignup.jsx'
+import SmsConsent from './components/SmsConsent.jsx'
 import FAQ from './components/FAQ.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -19,6 +20,7 @@ function App() {
       <Testimonials />
       <CarrierDirectory />
       <CarrierSignup />
+      <SmsConsent />
       <FAQ />
       <Contact />
       <Footer />
