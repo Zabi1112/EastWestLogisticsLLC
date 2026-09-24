@@ -1,0 +1,550 @@
+.truck-page {
+  background:var(--slate-50);
+  min-height:100vh;
+}
+
+.truck-header {
+  background:white;
+  border-bottom:1px solid #e3e7ee;
+}
+
+.truck-header__inner {
+  min-height:94px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.truck-brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font:700 20px var(--font-display);
+  color:var(--navy-900);
+}
+
+.truck-brand img {
+  width:62px;
+  height:62px;
+  object-fit:contain;
+}
+
+.truck-brand strong {
+  display:block;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-top:5px;
+}
+
+.truck-header nav {
+  display:flex;
+  gap:28px;
+  align-items:center;
+  font-size:14px;
+  font-weight:700;
+}
+
+.truck-header__phone {
+  color:var(--orange-700);
+}
+
+.truck-hero {
+  background:var(--navy-950);
+  color:white;
+  padding:66px 0 70px;
+  position:relative;
+  overflow:hidden;
+}
+
+.truck-hero:after {
+  content:'';
+  position:absolute;
+  width:340px;
+  height:340px;
+  border:70px solid #ffffff04;
+  transform:rotate(-25deg);
+  right:-150px;
+  top:-160px;
+  pointer-events:none;
+}
+
+.truck-hero__inner {
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:70px;
+  align-items:end;
+}
+
+.truck-hero .eyebrow {
+  color:#f3a780;
+}
+
+.truck-hero h1 {
+  font-size:clamp(32px,4.6vw,54px);
+  line-height:1.18;
+  color:white;
+  letter-spacing:-.045em;
+  margin:18px 0;
+}
+
+.truck-hero h1 span {
+  color:#f1a177;
+}
+
+.truck-hero p {
+  font-size:16px;
+  line-height:1.8;
+  max-width:620px;
+  color:#c1cbd9;
+}
+
+.truck-hero__note {
+  border-left:2px solid var(--orange-500);
+  padding:8px 0 8px 22px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.truck-hero__note p {
+  font-size:13px;
+  font-weight:400;
+  margin-top:12px;
+}
+
+.truck-dot {
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#29a876;
+  flex-shrink:0;
+  margin-right:7px;
+}
+
+.truck-board {
+  padding-top:44px;
+  padding-bottom:56px;
+  scroll-margin-top:20px;
+}
+
+.truck-board__heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:26px;
+}
+
+.truck-board h2 {
+  font-size:27px;
+  letter-spacing:-.035em;
+}
+
+.truck-board__heading p {
+  font-size:13px;
+  color:var(--slate-500);
+  margin-top:10px;
+  line-height:1.6;
+}
+
+.truck-refresh {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+}
+
+.truck-refresh span {
+  font-size:11px;
+  color:var(--slate-500);
+}
+
+.truck-refresh .btn {
+  font-size:12px;
+  padding:10px 16px;
+  background:white;
+}
+
+.truck-filters {
+  background:white;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto;
+  align-items:end;
+  gap:18px;
+  padding:22px;
+  border:1px solid #e1e6ed;
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-sm);
+}
+
+.truck-filters label {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  color:var(--navy-900);
+  min-width:0;
+}
+
+.truck-filters input,.truck-filters select {
+  height:46px;
+  width:100%;
+  min-width:0;
+  border:1px solid #cbd3df;
+  border-radius:7px;
+  padding:0 12px;
+  font:400 14px var(--font-body);
+  color:var(--slate-900);
+  background:var(--slate-50);
+}
+
+.truck-clear {
+  background:none;
+  border:none;
+  padding:14px 4px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange-700);
+  cursor:pointer;
+}
+
+.truck-page button:disabled {
+  opacity:.55;
+  cursor:default;
+}
+
+.truck-page :is(a,button,input,select):focus-visible {
+  outline:3px solid #5383cf;
+  outline-offset:4px;
+}
+
+.truck-count {
+  font-size:13px;
+  color:var(--slate-700);
+  padding:25px 0 18px;
+}
+
+.truck-count strong {
+  color:var(--navy-900);
+}
+
+.truck-count span {
+  color:var(--slate-500);
+  margin-left:8px;
+}
+
+.truck-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+
+.truck-card {
+  background:white;
+  border:1px solid #dce3ed;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  min-width:0;
+}
+
+.truck-card__top {
+  padding:17px 24px;
+  border-bottom:1px solid #edf0f5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:11px;
+  color:var(--slate-500);
+  overflow-wrap:anywhere;
+}
+
+.truck-status {
+  display:inline-flex;
+  align-items:center;
+  background:#eaf7ef;
+  color:#176440;
+  font-size:11px;
+  font-weight:800;
+  border-radius:20px;
+  padding:6px 11px;
+}
+
+.truck-label {
+  display:block;
+  color:var(--slate-500);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-weight:800;
+}
+
+.truck-card__location {
+  padding:24px 24px 18px;
+}
+
+.truck-card h3 {
+  font-size:25px;
+  letter-spacing:-.03em;
+  margin:8px 0 12px;
+  overflow-wrap:anywhere;
+}
+
+.truck-equipment {
+  display:inline-block;
+  font-size:12px;
+  color:var(--navy-800);
+  background:#edf2f8;
+  border-radius:5px;
+  padding:6px 9px;
+  font-weight:700;
+}
+
+.truck-card__schedule {
+  margin:0 24px;
+  padding:15px 18px;
+  background:#f8f9fb;
+  border-left:3px solid var(--orange-500);
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.truck-card__schedule strong {
+  font-size:14px;
+  line-height:1.6;
+  color:var(--navy-900);
+}
+
+.truck-card__schedule>span:last-child {
+  font-size:11px;
+  color:var(--slate-500);
+  overflow-wrap:anywhere;
+}
+
+.truck-card__details {
+  margin:20px 24px;
+  display:grid;
+  gap:12px;
+  font-size:12px;
+}
+
+.truck-card__details div {
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:12px;
+}
+
+.truck-card__details dt {
+  color:var(--slate-500);
+}
+
+.truck-card__details dd {
+  margin:0;
+  text-align:right;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+
+.truck-card__contact {
+  margin:0 24px;
+  padding:20px 0;
+  border-top:1px solid #e8edf3;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.truck-card__contact>div {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+
+.truck-card__contact strong {
+  font-size:14px;
+  color:var(--navy-900);
+}
+
+.truck-card__contact>div>span:last-child:not(.truck-label) {
+  font-size:12px;
+  color:var(--slate-700);
+}
+
+.truck-card__contact .btn {
+  font-size:12px;
+  padding:12px 17px;
+  box-shadow:none;
+}
+
+.truck-card__updated {
+  background:#fafbfc;
+  color:var(--slate-500);
+  font-size:10px;
+  padding:12px 24px;
+  border-top:1px solid #edf0f5;
+  line-height:1.7;
+}
+
+.truck-empty {
+  text-align:center;
+  background:white;
+  border:1px solid #e1e6ed;
+  border-radius:14px;
+  margin:24px 0;
+  padding:48px 24px;
+}
+
+.truck-empty h3 {
+  font-size:21px;
+}
+
+.truck-empty p {
+  font-size:14px;
+  color:var(--slate-500);
+  line-height:1.8;
+  max-width:580px;
+  margin:12px auto 22px;
+}
+
+.truck-error {
+  border-color:#ecd5c9;
+}
+
+.truck-board__footnote {
+  font-size:12px;
+  line-height:1.8;
+  color:var(--slate-500);
+  margin-top:28px;
+}
+
+.truck-footer {
+  background:white;
+  border-top:1px solid #e3e7ee;
+  padding:26px 0;
+  font-size:12px;
+  color:var(--slate-500);
+}
+
+.truck-footer>.container {
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.truck-footer a {
+  margin-left:24px;
+}
+
+.truck-skip {
+  position:absolute;
+  left:16px;
+  top:-100px;
+  z-index:10;
+  padding:14px;
+  background:white;
+}
+
+.truck-skip:focus {
+  top:12px;
+}
+
+@media(max-width:900px) {
+  .truck-hero__inner {
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+  .truck-hero__note {
+    max-width:480px;
+  }
+  .truck-filters {
+    grid-template-columns:1fr 1fr;
+  }
+  .truck-filters label:first-child {
+    grid-column:1/-1;
+  }
+  .truck-clear {
+    grid-column:1/-1;
+    padding:4px;
+  }
+  .truck-card__contact {
+    align-items:stretch;
+    flex-direction:column;
+  }
+}
+
+@media(max-width:600px) {
+  .truck-header__inner {
+    min-height:80px;
+    gap:10px;
+  }
+  .truck-brand {
+    font-size:16px;
+    gap:8px;
+  }
+  .truck-brand img {
+    width:44px;
+    height:44px;
+  }
+  .truck-brand strong {
+    font-size:9px;
+  }
+  .truck-header nav {
+    font-size:12px;
+  }
+  .truck-header__phone {
+    display:none;
+  }
+  .truck-hero {
+    padding:42px 0;
+  }
+  .truck-hero h1 {
+    font-size:34px;
+  }
+  .truck-hero p {
+    font-size:14px;
+  }
+  .truck-board__heading {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .truck-refresh {
+    flex-direction:row;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .truck-grid {
+    grid-template-columns:1fr;
+  }
+  .truck-filters {
+    padding:16px;
+    gap:14px;
+  }
+  .truck-filters input,.truck-filters select {
+    font-size:16px;
+  }
+  .truck-count span {
+    display:block;
+    margin:7px 0 0;
+  }
+  .truck-card__details div {
+    grid-template-columns:120px 1fr;
+  }
+  .truck-footer>.container {
+    flex-direction:column;
+  }
+  .truck-footer a {
+    margin:0 24px 0 0;
+  }
+  .truck-board {
+    padding-top:30px;
+  }
+}
+

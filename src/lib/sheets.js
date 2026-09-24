@@ -1,3 +1,5 @@
+import { parseCsv } from './csv.js'
+
 const SIGNUP_URL = import.meta.env.VITE_SHEETS_SIGNUP_URL
 const DIRECTORY_CSV_URL = import.meta.env.VITE_SHEETS_DIRECTORY_CSV_URL
 
@@ -26,51 +28,3 @@ export async function fetchApprovedCarriers() {
   return parseCsv(await res.text())
 }
 
-function parseCsv(text) {
-  const rows = []
-  let row = []
-  let field = ''
-  let inQuotes = false
-
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i]
-    if (inQuotes) {
-      if (char === '"' && text[i + 1] === '"') {
-        field += '"'
-        i++
-      } else if (char === '"') {
-        inQuotes = false
-      } else {
-        field += char
-      }
-    } else if (char === '"') {
-      inQuotes = true
-    } else if (char === ',') {
-      row.push(field)
-      field = ''
-    } else if (char === '\n' || char === '\r') {
-      if (char === '\r' && text[i + 1] === '\n') i++
-      row.push(field)
-      rows.push(row)
-      row = []
-      field = ''
-    } else {
-      field += char
-    }
-  }
-  if (field.length > 0 || row.length > 0) {
-    row.push(field)
-    rows.push(row)
-  }
-
-  const [header, ...dataRows] = rows.filter((r) => r.some((cell) => cell.trim() !== ''))
-  if (!header) return []
-
-  return dataRows.map((cells) => {
-    const record = {}
-    header.forEach((key, idx) => {
-      record[key.trim()] = (cells[idx] ?? '').trim()
-    })
-    return record
-  })
-}

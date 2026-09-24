@@ -31,6 +31,7 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           VITE_SHEETS_SIGNUP_URL: ${{ secrets.VITE_SHEETS_SIGNUP_URL }}
           VITE_SHEETS_DIRECTORY_CSV_URL: ${{ secrets.VITE_SHEETS_DIRECTORY_CSV_URL }}
+          VITE_SHEETS_TRUCKS_CSV_URL: ${{ secrets.VITE_SHEETS_TRUCKS_CSV_URL || 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSmlu_k-OOjYD74jUuhnee008ocOrThC8_Co2V_yC8DT4D0XdaspqM2uTzElY-8cZOZRuWObrBUAH5-/pub?gid=985649226&single=true&output=csv' }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

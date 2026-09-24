@@ -52,7 +52,6 @@ export default function Hero() {
             <img src={`${import.meta.env.BASE_URL}logo.png`} alt="East West Logistics LLC" />
           </div>
           <div className="hero__badge hero__badge--top">
-            <span>MC #000000</span>
             Verified Broker Network
           </div>
           <div className="hero__badge hero__badge--bottom">

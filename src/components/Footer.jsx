@@ -65,7 +65,6 @@ export default function Footer() {
             <li>(409) 248-2002</li>
             <li>truckingservice48@gmail.com</li>
             <li>5 Hillcrest Dr<br />Downingtown, PA 19335</li>
-            <li>MC #000000 &middot; DOT #0000000</li>
           </ul>
         </div>
       </div>
