@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './Navbar.css'
 
 const LINKS = [
+  { href: `${import.meta.env.BASE_URL}available-trucks/`, label: 'Available Trucks' },
   { href: '#about', label: 'About' },
   { href: '#services', label: 'Services' },
   { href: '#testimonials', label: 'Testimonials' },
