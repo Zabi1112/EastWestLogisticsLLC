@@ -25,3 +25,9 @@ No online reservation is created. Brokers call dispatch to confirm timing, carri
 Run `node --test src/lib/trucks.test.js`, `npm run build`, and `npm run lint`.
 
 Manual check: open `/available-trucks/`; check location, MC and dispatcher phone; filter by CA and Dry Van; search for a nonexistent city and clear filters. Change the dummy row from Available to Booked in the sheet and refresh after Google publishes the change. Test direct opening of the deployed URL on mobile and desktop.
+
+## Direct feed for consistent reads
+
+Google's published CSV was observed returning different snapshots on consecutive unique requests. For current reads, add `google-apps-script/available-trucks.gs` to the spreadsheet-bound Apps Script project. Keep existing code; there must be only one doGet handler. Deploy a web app with Execute as Me and access Anyone. For an existing deployment, select Deploy > Manage deployments > Edit > New version > Deploy.
+
+Set VITE_SHEETS_TRUCKS_API_URL to the resulting /exec URL locally and in the GitHub Actions repository secrets, then rebuild/deploy the website. The workflow currently uses the deployed endpoint as its public fallback, so the direct feed remains active even when the repository secret is not set. The client appends resource=available-trucks and a unique request token. The handler reads the sheet each time, exposes only the specified broker-facing columns, and returns only Available rows. Private signup and Locations tabs are never selected. Direct feed failures display an error instead of silently reverting to stale published data.
