@@ -3,7 +3,10 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Services from './components/Services.jsx'
 import Testimonials from './components/Testimonials.jsx'
-import CarrierDirectory from './components/CarrierDirectory.jsx'
+// OUR CARRIERS: To restore, uncomment this import, the component below,
+// and the Our Carriers link in Navbar.jsx. The sheet integration is preserved.
+// import CarrierDirectory from './components/CarrierDirectory.jsx'
+import CarrierPerformance from './components/CarrierPerformance.jsx'
 import CarrierSignup from './components/CarrierSignup.jsx'
 import SmsConsent from './components/SmsConsent.jsx'
 import FAQ from './components/FAQ.jsx'
@@ -15,10 +18,12 @@ function App() {
     <>
       <Navbar />
       <Hero />
+      <CarrierPerformance />
       <About />
       <Services />
       <Testimonials />
-      <CarrierDirectory />
+      {/* OUR CARRIERS: Uncomment the component and import above to restore this section. */}
+      {/* <CarrierDirectory /> */}
       <CarrierSignup />
       <SmsConsent />
       <FAQ />

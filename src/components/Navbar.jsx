@@ -6,7 +6,8 @@ const LINKS = [
   { href: '#about', label: 'About' },
   { href: '#services', label: 'Services' },
   { href: '#testimonials', label: 'Testimonials' },
-  { href: '#our-carriers', label: 'Our Carriers' },
+  // OUR CARRIERS: Uncomment this link and restore CarrierDirectory in App.jsx to enable again.
+  // { href: '#our-carriers', label: 'Our Carriers' },
   { href: '#carriers', label: 'For Carriers' },
   { href: '#sms-signup', label: 'SMS Sign-Up' },
   { href: '#faq', label: 'FAQ' },
