@@ -2,7 +2,6 @@
 .performance__intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
 .performance__intro h2 { font-size: clamp(28px, 3.5vw, 40px); max-width: 650px; margin: 14px 0; letter-spacing: -.035em; }
 .performance__intro p { color: var(--slate-700); line-height: 1.8; max-width: 620px; }
-.performance__demo { background: #fff0df; color: #8a421d; padding: 10px 15px; border: 1px solid #efd5b4; border-radius: 24px; font-size: 12px; font-weight: 800; white-space: nowrap; }
 .performance__dashboard { background: white; border: 1px solid #dce4ef; border-radius: 20px; overflow: hidden; box-shadow: 0 16px 50px #15305f09; }
 .performance__toolbar { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 30px; border-bottom: 1px solid #e5ebf2; }
 .performance__toolbar h3 { font-size: 18px; }
@@ -30,7 +29,7 @@
 .performance__bar:focus-visible rect { stroke: #0a1628; stroke-width: 3px; }
 .performance__selection { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; background: #f4f7fb; min-height: 46px; padding: 12px 16px; margin-top: 16px; border-radius: 8px; font-size: 12px; color: #55637a; }
 .performance__selection strong { color: var(--navy-900); }
-.performance__disclosure { border-top: 1px solid #e5ebf2; background: #fcfdff; padding: 18px 30px; color: #647087; line-height: 1.8; font-size: 11px; }
+.performance__disclosure { border-top: 1px solid #e5ebf2; background: #fcfdff; padding: 18px 30px; color: #55637a; line-height: 1.8; font-size: 12px; }
 .performance__table { font-size: 12px; margin-top: 18px; color: #55637a; }
 .performance__table summary { cursor: pointer; }
 .performance__table table { width: 100%; border-collapse: collapse; margin-top: 12px; }

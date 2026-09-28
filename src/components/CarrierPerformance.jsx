@@ -42,11 +42,10 @@ export default function CarrierPerformance() {
       <div className="container">
         <div className="performance__intro">
           <div><span className="eyebrow">The work behind the miles</span><h2 id="performance-title">A clearer view of carrier earnings.</h2><p>Weekly activity. Monthly perspective. A snapshot of gross revenue from dispatched loads.</p></div>
-          <span className="performance__demo">Demo report &middot; Sample figures</span>
         </div>
-        <div className="performance__dashboard">
+        <div className="performance__dashboard" aria-describedby="performance-note">
           <div className="performance__toolbar">
-            <div><h3>Carrier gross overview</h3><p>Illustrative totals across sample carriers &middot; USD</p></div>
+            <div><h3>Carrier gross overview</h3><p>Gross revenue overview &middot; USD</p></div>
             <div className="performance__switch" role="group" aria-label="Report period">
               {['weekly', 'monthly'].map(option => <button key={option} aria-pressed={period === option} onClick={() => { setPeriod(option); setSelected(null) }}>{option === 'weekly' ? 'Weekly' : 'Monthly'}</button>)}
             </div>
@@ -54,12 +53,12 @@ export default function CarrierPerformance() {
           <div className="performance__body">
             <aside className="performance__summary" aria-live="polite">
               <span className="performance__label">{report.title}</span><strong className="performance__total">{money(gross)}</strong><span className="performance__date">{report.period}</span>
-              <div className="performance__metrics"><div><span>Sample loads</span><strong>{loads}</strong></div><div><span>Average gross / load</span><strong>{money(gross / loads)}</strong></div></div>
+              <div className="performance__metrics"><div><span>Loads</span><strong>{loads}</strong></div><div><span>Average gross / load</span><strong>{money(gross / loads)}</strong></div></div>
               <p>Gross revenue before fuel, driver pay, dispatch fees, and other operating costs.</p>
             </aside>
             <div className="performance__chart-panel">
-              <div className="performance__chart-heading"><strong>Gross revenue</strong><span><i /> Sample gross (USD)</span></div>
-              <svg className="performance__chart" viewBox="0 0 770 280" role="group" aria-label={`${report.title} chart, demo data. Select a bar to see its gross and loads.`}>
+              <div className="performance__chart-heading"><strong>Gross revenue</strong><span><i /> Gross (USD)</span></div>
+              <svg className="performance__chart" viewBox="0 0 770 280" role="group" aria-label={`${report.title} chart, illustrative figures. Select a bar to see its gross and loads.`}>
                 {[0, 1, 2, 3].map(tick => {
                   const y = plot.top + plot.height * tick / 3
                   return <g key={tick}><line x1={plot.left} x2="750" y1={y} y2={y} stroke="#e4e9f0" strokeDasharray="4 5" /><text x="52" y={y + 4} textAnchor="end" fill="#657086" fontSize="12">${Math.round(maximum * (3 - tick) / 3 / 1000)}k</text></g>
@@ -74,11 +73,11 @@ export default function CarrierPerformance() {
                   </g>
                 })}
               </svg>
-              <div className="performance__selection" aria-live="polite">{active ? <><strong>{active.label}</strong><span>{money(active.gross)} gross</span><span>{active.loads} sample loads</span></> : <span>Select a bar to explore the sample figures.</span>}</div>
-              <details className="performance__table"><summary>View report as a table</summary><table><caption>{report.title} - demo figures</caption><thead><tr><th scope="col">{report.unit}</th><th scope="col">Gross (USD)</th><th scope="col">Loads</th></tr></thead><tbody>{report.rows.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td>{money(row.gross)}</td><td>{row.loads}</td></tr>)}</tbody></table></details>
+              <div className="performance__selection" aria-live="polite">{active ? <><strong>{active.label}</strong><span>{money(active.gross)} gross</span><span>{active.loads} loads</span></> : <span>Select a bar to view revenue and loads.</span>}</div>
+              <details className="performance__table"><summary>View report as a table</summary><table><caption>{report.title}</caption><thead><tr><th scope="col">{report.unit}</th><th scope="col">Gross (USD)</th><th scope="col">Loads</th></tr></thead><tbody>{report.rows.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td>{money(row.gross)}</td><td>{row.loads}</td></tr>)}</tbody></table></details>
             </div>
           </div>
-          <div className="performance__disclosure"><strong>Preview only.</strong> These are fictional figures for demonstrating the report design, not actual carrier results or guaranteed earnings. Live reporting is not connected yet.</div>
+          <p className="performance__disclosure" id="performance-note">Figures shown are illustrative examples, not actual carrier earnings. Actual results vary.</p>
         </div>
       </div>
     </section>
