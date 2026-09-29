@@ -1,39 +1,49 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './CarrierPerformance.css'
+import { validateEarnings } from '../lib/earnings.js'
+const EARNINGS_URL = import.meta.env.VITE_SHEETS_EARNINGS_API_URL?.trim()
 
-// DEMO DATA ONLY. Replace these period records with the approved reporting feed
-// when it is ready. Keep the demo disclosure until real data is connected.
-const DEMO_REPORTS = {
-  weekly: {
-    title: 'Weekly gross', period: 'Sep 21 - 27, 2026', unit: 'Day',
-    rows: [
-      { label: 'Mon', gross: 8200, loads: 4 }, { label: 'Tue', gross: 9600, loads: 5 },
-      { label: 'Wed', gross: 7100, loads: 4 }, { label: 'Thu', gross: 11200, loads: 6 },
-      { label: 'Fri', gross: 8900, loads: 4 }, { label: 'Sat', gross: 4800, loads: 3 },
-      { label: 'Sun', gross: 3200, loads: 2 },
-    ],
-  },
-  monthly: {
-    title: 'Monthly gross', period: 'September 2026', unit: 'Period',
-    rows: [
-      { label: 'Sep 1-6', gross: 38500, loads: 20 },
-      { label: 'Sep 7-13', gross: 49200, loads: 25 },
-      { label: 'Sep 14-20', gross: 46800, loads: 24 },
-      { label: 'Sep 21-27', gross: 53000, loads: 28 },
-      { label: 'Sep 28-30', gross: 18500, loads: 10 },
-    ],
-  },
-}
 const money = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
 
 export default function CarrierPerformance() {
   const [period, setPeriod] = useState('weekly')
   const [selected, setSelected] = useState(null)
-  const report = DEMO_REPORTS[period]
+  const [feed, setFeed] = useState(null)
+  const [failed, setFailed] = useState(false)
+  const [reportId, setReportId] = useState('')
+  useEffect(() => {
+    if (!EARNINGS_URL) return
+    let disposed = false
+    let controller = null
+    const refresh = async () => {
+      if (controller || document.hidden) return
+      controller = new AbortController()
+      const timeout = setTimeout(() => controller?.abort(), 30000)
+      try {
+        const url = new URL(EARNINGS_URL)
+        url.searchParams.set('_request', crypto.randomUUID())
+        const response = await fetch(url, { signal: controller.signal, cache: 'no-store' })
+        if (!response.ok) throw new Error('Report unavailable')
+        const data = validateEarnings(await response.json())
+        if (!disposed) { setFeed(data); setFailed(false); setSelected(null) }
+      } catch {
+        if (!disposed) setFailed(true)
+      } finally { clearTimeout(timeout); controller = null }
+    }
+    refresh()
+    const timer = setInterval(refresh, 60000)
+    document.addEventListener('visibilitychange', refresh)
+    return () => { disposed = true; clearInterval(timer); document.removeEventListener('visibilitychange', refresh); controller?.abort() }
+  }, [])
+  const reports = feed?.[period] || []
+  const report = reports.find(item => item.id === reportId) || reports[0]
+  if (failed || !report) {
+    return <section className="section performance" id="carrier-performance"><div className="container"><h2>Carrier gross overview</h2><p role="status">{failed || !EARNINGS_URL ? 'The earnings report is temporarily unavailable. Please check back shortly.' : !feed ? 'Loading carrier earnings...' : 'No completed loads are recorded for this period.'}</p></div></section>
+  }
   const gross = report.rows.reduce((total, row) => total + row.gross, 0)
   const loads = report.rows.reduce((total, row) => total + row.loads, 0)
-  const active = selected === null ? null : report.rows[selected]
-  const maximum = Math.ceil(Math.max(...report.rows.map(row => row.gross)) / 5000) * 5000
+  const active = selected === null ? null : report.rows[selected] || null
+  const maximum = Math.max(5000, Math.ceil(Math.max(...report.rows.map(row => row.gross)) / 5000) * 5000)
   const plot = { left: 66, top: 25, width: 674, height: 215 }
   const step = plot.width / report.rows.length
 
@@ -47,18 +57,19 @@ export default function CarrierPerformance() {
           <div className="performance__toolbar">
             <div><h3>Carrier gross overview</h3><p>Gross revenue overview &middot; USD</p></div>
             <div className="performance__switch" role="group" aria-label="Report period">
-              {['weekly', 'monthly'].map(option => <button key={option} aria-pressed={period === option} onClick={() => { setPeriod(option); setSelected(null) }}>{option === 'weekly' ? 'Weekly' : 'Monthly'}</button>)}
+              {['weekly', 'monthly'].map(option => <button key={option} aria-pressed={period === option} onClick={() => { setPeriod(option); setSelected(null); setReportId('') }}>{option === 'weekly' ? 'Weekly' : 'Monthly'}</button>)}
             </div>
           </div>
+          {EARNINGS_URL && <div className="performance__period-picker"><label>Choose {period === 'weekly' ? 'week' : 'month'} <select value={report.id} onChange={event => { setReportId(event.target.value); setSelected(null) }}>{reports.map(item => <option key={item.id} value={item.id}>{item.period}</option>)}</select></label><span>Updated {new Date(feed.generatedAt).toLocaleString()}</span></div>}
           <div className="performance__body">
             <aside className="performance__summary" aria-live="polite">
               <span className="performance__label">{report.title}</span><strong className="performance__total">{money(gross)}</strong><span className="performance__date">{report.period}</span>
-              <div className="performance__metrics"><div><span>Loads</span><strong>{loads}</strong></div><div><span>Average gross / load</span><strong>{money(gross / loads)}</strong></div></div>
+              <div className="performance__metrics"><div><span>Loads</span><strong>{loads}</strong></div><div><span>Average gross / load</span><strong>{money(loads ? gross / loads : 0)}</strong></div></div>
               <p>Gross revenue before fuel, driver pay, dispatch fees, and other operating costs.</p>
             </aside>
             <div className="performance__chart-panel">
               <div className="performance__chart-heading"><strong>Gross revenue</strong><span><i /> Gross (USD)</span></div>
-              <svg className="performance__chart" viewBox="0 0 770 280" role="group" aria-label={`${report.title} chart, illustrative figures. Select a bar to see its gross and loads.`}>
+              <svg className="performance__chart" viewBox="0 0 770 280" role="group" aria-label={`${report.title} chart, completed load totals. Select a bar to see its gross and loads.`}>
                 {[0, 1, 2, 3].map(tick => {
                   const y = plot.top + plot.height * tick / 3
                   return <g key={tick}><line x1={plot.left} x2="750" y1={y} y2={y} stroke="#e4e9f0" strokeDasharray="4 5" /><text x="52" y={y + 4} textAnchor="end" fill="#657086" fontSize="12">${Math.round(maximum * (3 - tick) / 3 / 1000)}k</text></g>
@@ -77,7 +88,7 @@ export default function CarrierPerformance() {
               <details className="performance__table"><summary>View report as a table</summary><table><caption>{report.title}</caption><thead><tr><th scope="col">{report.unit}</th><th scope="col">Gross (USD)</th><th scope="col">Loads</th></tr></thead><tbody>{report.rows.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td>{money(row.gross)}</td><td>{row.loads}</td></tr>)}</tbody></table></details>
             </div>
           </div>
-          <p className="performance__disclosure" id="performance-note">Figures shown are illustrative examples, not actual carrier earnings. Actual results vary.</p>
+          <p className="performance__disclosure" id="performance-note">Combined booking rates for loads marked DONE, grouped by load date. Weeks run Monday to Sunday; monthly totals follow calendar months. Gross is before operating costs.</p>
         </div>
       </div>
     </section>
